@@ -2,6 +2,9 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 import './Register.css';
+import axios from 'axios';
+
+const url = 'http://localhost:5000';
 
 class Register extends React.Component {
     constructor(props) {
@@ -9,7 +12,7 @@ class Register extends React.Component {
         this.state = {
             username: '',
             password: '',
-            errorMsg: ''
+            errorMsg: '',
         }
     }
 
@@ -17,6 +20,23 @@ class Register extends React.Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    handleSubmit = e => {
+        e.preventDefault();
+        if (this.state.username.length > 2 && this.state.password.length > 7) {
+            axios.post(`${url}/api/register`, {username: this.state.username, password: this.state.password })
+                .then(res => {
+                    this.props.history.push('/');
+                })
+                .catch(err => {
+                    this.setState({ errorMsg: err.response.data.message });
+                })
+        } else {
+            this.setState({
+                errorMsg: 'Please format credentials'
+            })
+        }
     }
 
     
@@ -34,6 +54,9 @@ class Register extends React.Component {
                         value={this.state.username} 
                         onChange={this.handleChanges} 
                     />
+                    {this.state.username && this.state.username.length < 3 &&
+                        <h4>Username must be at least 3 characters</h4>
+                    }
                     <input 
                         required 
                         type='password' 
@@ -42,6 +65,9 @@ class Register extends React.Component {
                         value={this.state.password} 
                         onChange={this.handleChanges} 
                     />
+                    {this.state.password && this.state.password.length < 8 &&
+                        <h4>Password must be at least 8 characters</h4>
+                    }
                     <button type='submit'>Register</button>
                 </form>
                 <h3>{this.state.errorMsg}</h3>

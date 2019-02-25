@@ -19,6 +19,10 @@ class Login extends React.Component {
             errorMsg: '',
           }
     }
+
+    componentDidMount() {
+        localStorage.clear();
+    }
     
     handleChanges = e => {
         this.setState({
@@ -30,10 +34,13 @@ class Login extends React.Component {
         e.preventDefault();
         axios.post(`${url}/api/login`, { username: this.state.username, password: this.state.password })
         .then(res => {
+            localStorage.setItem('username', this.state.username);
+            localStorage.setItem('password', this.state.password);
             this.setState({
             isLoggedIn: true,
             errorMsg: ''
-            })
+            });
+            this.props.history.push('/users');
         })
         .catch(err => {
             this.setState({
@@ -81,8 +88,6 @@ class Login extends React.Component {
                 </section>
             </>
             }
-            <Route path="/register" component={Register} />
-            {/* <Route path="/users" component={UsersList} /> */}
         </div>
         );
     }
