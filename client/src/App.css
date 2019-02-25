@@ -2,14 +2,5 @@
   text-align: center;
 }
 
-.login-form {
-  display: flex;
-  flex-direction: column;
-  margin: 100px auto;
-  width: 30%; 
-}
 
-.login-form input {
-  margin: 20px;
-}
 
