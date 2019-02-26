@@ -54,7 +54,7 @@ server.post('/api/register', async (req, res) => {
             const newUser = await db.add(user);
             res.status(201).json(newUser);
         } catch (error) {
-            res.status(500).json({ message: 'Error adding user to the database' });
+            res.status(500).json({ message: `Error adding user to the database.  Likely, a user by the name of ${req.body.username} already exists` });
         }
     }
 });
@@ -68,10 +68,10 @@ server.post('/api/login', async (req, res) => {
         if (user && bcrypt.compareSync(password, user.password)) {
             res.status(200).json({ message: `Welcome ${user.username}!` });
         } else {
-            res.status(401).json({ msesage: 'You shall not pass!' });
+            res.status(401).json({ message: 'You shall not pass!' });
         }
     } catch (error) {
-        res.status(500).json({ mesage: 'Error in retrieving user info' });
+        res.status(500).json({ message: 'Error in retrieving user info' });
     }
 });
 
