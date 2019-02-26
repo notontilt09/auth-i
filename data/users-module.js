@@ -9,6 +9,7 @@ module.exports = {
     find,
     findBy,
     findById,
+    db
 };
 
 function find() {

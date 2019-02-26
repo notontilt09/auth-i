@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import './Login.css';
 
+axios.defaults.withCredentials = true;
+
 const url = 'http://localhost:5000';
 
 class Login extends React.Component {
@@ -32,11 +34,9 @@ class Login extends React.Component {
         e.preventDefault();
         axios.post(`${url}/api/login`, { username: this.state.username, password: this.state.password })
         .then(res => {
-            localStorage.setItem('username', this.state.username);
-            localStorage.setItem('password', this.state.password);
             this.setState({
-            isLoggedIn: true,
-            errorMsg: ''
+                isLoggedIn: true,
+                errorMsg: ''
             });
             this.props.history.push('/users');
         })

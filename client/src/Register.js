@@ -27,7 +27,7 @@ class Register extends React.Component {
         if (this.state.username.length > 2 && this.state.password.length > 7) {
             axios.post(`${url}/api/register`, {username: this.state.username, password: this.state.password })
                 .then(res => {
-                    this.props.history.push('/');
+                    this.props.history.push('/users');
                 })
                 .catch(err => {
                     this.setState({ errorMsg: err.response.data.message });
