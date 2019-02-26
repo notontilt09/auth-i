@@ -12,7 +12,8 @@ class Users extends React.Component {
         super(props)
         this.state = {
             isLoggedIn: false,
-            users: []
+            users: [],
+            currentUser: localStorage.getItem('user') || '',
         }
     }
 
@@ -51,6 +52,7 @@ class Users extends React.Component {
                 <div className='users'>
                     <button onClick={this.logout}>Logout</button>
                     <h2>Users List</h2>
+                    <h3>Logged in as {this.state.currentUser}</h3>
                     <div className='users-list'>
                         {this.state.users.map(user => {
                             return (

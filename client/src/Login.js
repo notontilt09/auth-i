@@ -38,6 +38,7 @@ class Login extends React.Component {
                 isLoggedIn: true,
                 errorMsg: ''
             });
+            localStorage.setItem('user', this.state.username)
             this.props.history.push('/users');
         })
         .catch(err => {
