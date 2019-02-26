@@ -55,7 +55,7 @@ class Register extends React.Component {
                         onChange={this.handleChanges} 
                     />
                     {this.state.username && this.state.username.length < 3 &&
-                        <h4>Username must be at least 3 characters</h4>
+                        <h4 className="input-error">Username must be at least 3 characters</h4>
                     }
                     <input 
                         required 
@@ -66,11 +66,13 @@ class Register extends React.Component {
                         onChange={this.handleChanges} 
                     />
                     {this.state.password && this.state.password.length < 8 &&
-                        <h4>Password must be at least 8 characters</h4>
+                        <h4 className='input-error'>Password must be at least 8 characters</h4>
                     }
                     <button type='submit'>Register</button>
                 </form>
-                <h3>{this.state.errorMsg}</h3>
+                {this.state.errorMsg && 
+                    <h3 className='error'>{this.state.errorMsg}</h3>    
+                }
             </div>
         )
     }

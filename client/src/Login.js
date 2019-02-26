@@ -1,8 +1,6 @@
-import React, { Component } from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-
-import Register from './Register';
 
 import './Login.css';
 
@@ -83,9 +81,11 @@ class Login extends React.Component {
                 <button type='submit'>Login</button>
                 <button onClick={this.navToRegister}>Click here to register a new account.</button>
                 </form>
-                <section className='error'>
-                <h3>{this.state.errorMsg}</h3>
-                </section>
+                {this.state.errorMsg &&
+                    <section className='error'>
+                        <h3>{this.state.errorMsg}</h3>
+                    </section>
+                }
             </>
             }
         </div>

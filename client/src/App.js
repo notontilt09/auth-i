@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Link, withRouter } from 'react-router-dom';
-import axios from 'axios';
+import { Route, withRouter } from 'react-router-dom';
+
 
 import Register from './Register';
 import Login from './Login';
 import Users from './Users';
 
 import './App.css';
-
-const url = 'http://localhost:5000';
 
 class App extends Component {
   render() {
